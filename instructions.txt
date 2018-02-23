@@ -1,0 +1,19 @@
+If there’s a way to store and sort by word information (like etymology, part of speech, alternate spellings, bolded words within the entry, “Revised” words) or extract word information like the definition, pronunciation, or etymology then I’d be happy to keep paying at the same rate of $25/hour. There’s probably something I mentioned that will need more thorough explaining, so just let me know and I’ll be happy to expound upon my ideas!
+
+Hey Walter, sorry I haven’t replied sooner! If possible, the word’s languages in chronological order would be ideal, but if it requires too much time and effort don’t worry about it.  I think the only other etymological data that would be worth having is if the program could store data like the origin mentioning “borrowed from”, “probably from”, or “perhaps from”. For example, the word abalone is listed as “borrowed from American Spanish”.
+Here’s a file of all the languages I came up with (including variations of individual languages like New Latin vs , with some assistance from ethnologue.com (there are like 6,500 of them)
+
+01 - Found basic sections of definitions
+02 - Improved what was stored
+03 - Update to Python3, clean up csv, start working on db
+04 - Started pure and full databases (set up structure), got database viewer set up
+05 - Pure database works for small numbers of words
+06 - Full database infra in place but untested, cleaned up some code
+07 - Checked that full import works, did full import, found common etymology stuffs
+08 - Compiled list of common languages, added these to database, started running
+09 - Etymology stored correctly, started database queries
+10 - Cleaned up old files, full_words gets different definitions, adding CL and exact word searching
+11 - Worked on getting multiple entries per word
+12 - Multiple definitions are now properly recovered
+13 - get_full_words now handles error and continues onward. Credentials no longer stored in code files. Capitalization shouldn't matter, but untested. Cleaned up and commented get_pure and dict_queries
+14 - 0 git, more commenting, test capitalization
