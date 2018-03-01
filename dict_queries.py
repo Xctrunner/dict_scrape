@@ -5,8 +5,6 @@ May not be distributed or modified without explicit permission of owner.
 """
 
 import sqlite3
-import sys
-import db_queries
 import argparse
 
 
@@ -29,6 +27,27 @@ def fetch_word_pos(word, speech_part):
 
     word_tuple_list = cursor.execute('''SELECT * FROM fullWordsEtym WHERE word = (?) AND part LIKE (?)''',
                                      (word, speech_part + "%")).fetchall()
+
+    connection.close()
+
+    return format_tuple_list(word_tuple_list)
+
+
+def fetch_new_words():
+    connection = sqlite3.connect('words.db')
+    cursor = connection.cursor()
+
+    word_tuple_list = cursor.execute('''SELECT (word) FROM fullWordsEtym WHERE new = True''').fetchall()
+
+    connection.close()
+
+    return format_tuple_list(word_tuple_list)
+
+def fetch_revised_words():
+    connection = sqlite3.connect('words.db')
+    cursor = connection.cursor()
+
+    word_tuple_list = cursor.execute('''SELECT (word) FROM fullWordsEtym WHERE revised = True''').fetchall()
 
     connection.close()
 
@@ -64,20 +83,29 @@ def format_tuple_list(word_tuple_list):
 # CLI information for actually running the program
 def parse_cla():
     parser = argparse.ArgumentParser()
-    parser.add_argument("word", help="input word to look up")
+    parser.add_argument("--word", help="input word to look up")
     parser.add_argument("--part", help="part of speech")
+    parser.add_argument("--new", help="output all words with new icon", action="store_true")
+    parser.add_argument("--revised", help="output all words with revised icon", action="store_true")
+    args = parser.parse_args()
 
-    # if a part of speech was given, use it
-    if args.part:
-        word_string = fetch_word_pos(args.word, args.part)
-    else:
-        word_string = fetch_exact_word(args.word)
+    if args.word:
+        # if a part of speech was given, use it
+        if args.part:
+            word_string = fetch_word_pos(args.word, args.part)
+        else:
+            word_string = fetch_exact_word(args.word)
 
-    if word_string is None:
-        # TODO should try to run approx query
-        print('None')
+        if word_string is None:
+            # TODO should try to run approx query
+            print('None')
+        else:
+            print(word_string)
     else:
-        print(word_string)
+        if args.new:
+            fetch_new_words()
+        if args.revised:
+            fetch_revised_words()
 
 
 if __name__ == '__main__':

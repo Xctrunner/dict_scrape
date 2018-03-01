@@ -16,4 +16,4 @@ Here’s a file of all the languages I came up with (including variations of ind
 11 - Worked on getting multiple entries per word
 12 - Multiple definitions are now properly recovered
 13 - get_full_words now handles error and continues onward. Credentials no longer stored in code files. Capitalization shouldn't matter, but untested. Cleaned up and commented get_pure and dict_queries
-14 - 0 git, more commenting, test capitalization
+14 - git, more commenting, new and revised queries, 15 test queries, test capitalization, couldn't find words

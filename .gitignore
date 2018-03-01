@@ -1,5 +1,9 @@
 no_vcs/*
+
 .idea/*
+
 *pycache*
+
 *~
+
 *.db

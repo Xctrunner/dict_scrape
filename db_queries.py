@@ -24,6 +24,7 @@ def create_pure():
     connection.close()
 
 
+# table for words, specifically keeping track or their superscript when there are multiple entries
 def create_pure_sup():
 
     create_pure_table = \
@@ -145,6 +146,7 @@ def del_full():
     connection.close()
 
 
+# delete the full information table
 def del_full_etym():
 
     connection = sqlite3.connect('words.db')
@@ -156,6 +158,7 @@ def del_full_etym():
     connection.close()
 
 if __name__ == '__main__':
+    # other command line arguments may be added here
     parser = argparse.ArgumentParser()
     parser.add_argument("--fullClear", help="input word to look up", action="store_true")
     args = parser.parse_args()
