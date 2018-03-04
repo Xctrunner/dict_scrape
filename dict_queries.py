@@ -6,6 +6,7 @@ May not be distributed or modified without explicit permission of owner.
 
 import sqlite3
 import argparse
+import os
 
 
 # looks for an exact match to the word parameter and returns it
@@ -37,21 +38,28 @@ def fetch_new_words():
     connection = sqlite3.connect('words.db')
     cursor = connection.cursor()
 
-    word_tuple_list = cursor.execute('''SELECT (word) FROM fullWordsEtym WHERE new = True''').fetchall()
+    word_tuple_list = cursor.execute('''SELECT (word) FROM fullWordsEtym WHERE new = ?''', (True,)).fetchall()
 
     connection.close()
 
-    return format_tuple_list(word_tuple_list)
+    if word_tuple_list:
+        with open('results/new.txt', 'wb') as new_file:
+            for word_tuple in word_tuple_list:
+                new_file.write((word_tuple[0] + os.linesep).encode('utf-8'))
+
 
 def fetch_revised_words():
     connection = sqlite3.connect('words.db')
     cursor = connection.cursor()
 
-    word_tuple_list = cursor.execute('''SELECT (word) FROM fullWordsEtym WHERE revised = True''').fetchall()
+    word_tuple_list = cursor.execute('''SELECT (word) FROM fullWordsEtym WHERE revised = ?''', (True,)).fetchall()
 
     connection.close()
 
-    return format_tuple_list(word_tuple_list)
+    if word_tuple_list:
+        with open('results/revised.txt', 'wb') as revised_file:
+            for word_tuple in word_tuple_list:
+                revised_file.write((word_tuple[0] + os.linesep).encode('utf-8'))
 
 
 # takes the return from the database and formats it nicely, currently ignoring language information
