@@ -34,6 +34,7 @@ def fetch_word_pos(word, speech_part):
     return format_tuple_list(word_tuple_list)
 
 
+# gets all words marked as new and prints them to a text file
 def fetch_new_words():
     connection = sqlite3.connect('words.db')
     cursor = connection.cursor()
@@ -48,6 +49,7 @@ def fetch_new_words():
                 new_file.write((word_tuple[0] + os.linesep).encode('utf-8'))
 
 
+# gets all words marked as revised and prints them to a text file
 def fetch_revised_words():
     connection = sqlite3.connect('words.db')
     cursor = connection.cursor()
