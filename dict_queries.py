@@ -75,19 +75,52 @@ def format_tuple_list(word_tuple_list):
         # skip id
         word_string += 'Word: ' + tup[1] + '\n'
         if tup[2] != '':
-            word_string += 'Part of speech: ' + tup[2] + '\n'
-        if tup[3] != '':
-            word_string += 'Alternate spelling: ' + tup[3] + '\n'
-        if tup[4] != '[]':
-            word_string += 'Bolded words in entry: ' + tup[4] + '\n'
-        if tup[5] != '':
-            word_string += 'Etymology section: ' + tup[5] + '\n'
-        if tup[134] != '':
-            word_string += 'Pronunciation: ' + tup[134] + '\n'
+            word_string += '# Syllables: ' + tup[2] + '\n'
+        if tup[3]
+            word_string += 'Part of speech: ' + tup[3] + '\n'
+        if tup[4] != '':
+            word_string += 'Alternate spelling: ' + tup[4] + '\n'
+        if tup[5] != '[]':
+            word_string += 'Bolded words in entry: ' + tup[5] + '\n'
+        if tup[6] != '':
+            word_string += 'Etymology section: ' + tup[6] + '\n'
         if tup[135] != '':
-            word_string += 'Definition: ' + tup[135] + '\n'
+            word_string += 'Pronunciation: ' + tup[135] + '\n'
+        if tup[136] != '':
+            word_string += 'Definition: ' + tup[136] + '\n'
 
     return word_string
+
+
+def get_column_list():
+    first_chunk = ['Word #', 'Word', '# Syllables', 'Part of Speech', 'Alt Spelling', 'Bold List', 'Etymology']
+    third_chunk = ['Revised', 'New', 'Pronunciation', 'Definition']
+    with open('languages.txt', 'r') as lang_file:
+        second_chunk = [i.strip() for i in lang_file]
+    return first_chunk + second_chunk + third_chunk
+
+
+def format_pandas(word_list):
+    import pandas as pd
+    dframe = pd.DataFrame(word_list, columns=get_column_list())
+    return dframe
+
+
+def write_to_excel(dframe):
+    dframe.to_excel('full_sheet.xlsx')
+
+
+def db_to_excel():
+    connection = sqlite3.connect('words.db')
+    cursor = connection.cursor()
+
+    full_word_list = cursor.execute('''SELECT * FROM fullWordsEtym''').fetchall()
+
+    connection.close()
+
+    dframe = format_pandas(full_word_list)
+
+    write_to_excel(dframe)
 
 
 # CLI information for actually running the program
@@ -97,7 +130,11 @@ def parse_cla():
     parser.add_argument("--part", help="part of speech")
     parser.add_argument("--new", help="output all words with new icon", action="store_true")
     parser.add_argument("--revised", help="output all words with revised icon", action="store_true")
+    parser.add_argument("--excel", help="convert current database to excel spreadsheet", action="store_true")
     args = parser.parse_args()
+
+    if args.excel:
+        db_to_excel()
 
     if args.word:
         # if a part of speech was given, use it

@@ -16,14 +16,15 @@ session_requests = requests.session()
 with open('no_vcs/login_info.txt', 'r') as login_file:
     login_info = login_file.readlines()
 
-login_payload = {"email": login_info[0], "password": login_info[1]}
+login_payload = {"email": login_info[0].strip(), "password": login_info[1].strip()}
 
 # login
 login_url = "https://unabridged.merriam-webster.com/subscriber/lapi/1/subscriber/identity/login/ue"
 login_result = session_requests.post(login_url, data=login_payload)
 
 # generic search, should bring up everything
-search_url = 'http://unabridged.merriam-webster.com/unabridged/**'
+# search_url = 'http://unabridged.merriam-webster.com/unabridged/**'
+search_url = 'http://unabridged.merriam-webster.com/unabridged/a*'
 
 # open up database
 connection = sqlite3.connect('words.db')

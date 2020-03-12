@@ -27,6 +27,7 @@ Breton
 British
 Burmese
 Canadian
+Canadian French
 Carib
 Catalan
 Celtic
@@ -54,8 +55,8 @@ Gaelic
 Galibi
 Gaulish
 German
-Germany
 Germanic
+Germany
 Gothic
 Greek
 Guarani
@@ -65,14 +66,17 @@ Hindi
 Hittite
 Hungarian
 Icelandic
+Imitative
 India
 Indian
 Indo
+International Scientific Vocabulary
 Iranian
 Italian
 Japanese
 Javanese
 Kanarese
+Late Latin
 Latin
 Latvian
 Lithuanian
@@ -81,19 +85,29 @@ Malay
 Malayalam
 Maori
 Marathi
+Medieval Latin
 Mexican
+Middle Dutch
+Middle English
+Middle French
+Middle High German
 Nahuatl
 Narraganset
 Natick
+New Latin
 Norse
 Norwegian
-Ojiwa
+Ojibwa
+Old English
+Old French
+Old Norse
 Persian
 Philippine
 Polish
 Portuguese
 Prussian
 Quechua
+Reduplicative
 Roman
 Russian
 Samoan
@@ -119,8 +133,9 @@ Tocharian
 Tupi
 Turkish
 Turkic
+Unknown
 Urdu
-Vulgar
+Vulgar Latin
 Welsh
 Yiddish
 Zulu

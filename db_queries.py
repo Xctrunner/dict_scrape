@@ -49,26 +49,20 @@ def create_full():
         CREATE TABLE IF NOT EXISTS fullWordsEtym (
         word_num INTEGER PRIMARY KEY,
         word VARCHAR(100),
+        syllables INTEGER
         part VARCHAR(50),
         alt_spelling VARCHAR(100),
         bold_list VARCHAR(500),
         etymology VARCHAR(1000),
-        """
-
-    create_full_table_2 = ''
-    with open('languages.txt', 'r') as f:
-        for line in f.readlines():
-            line = line.strip().lower()
-            line = line.replace('-', '_')
-            create_full_table_2 += line + ' BOOL,\n'
-    print(create_full_table_2)
-
-    create_full_table_3 = \
-        """
+        main_language VARCHAR(100),
+        origin_langs VARCHAR(500),
         revised BOOL,
         new BOOL,
         pronounce VARCHAR(100),
-        definition VARCHAR(1000) );
+        formula VARCHAR(100),
+        formulaic BOOL,
+        is_root BOOL,
+        definition VARCHAR(1000));
         """
 
     create_full_table = create_full_table_1 + create_full_table_2 + create_full_table_3
